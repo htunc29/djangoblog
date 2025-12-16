@@ -1,20 +1,32 @@
-FROM python:3.12-slim
+# Use the official Python runtime image
+FROM python:3.13
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Create the app directory
+RUN mkdir /app
 
+# Set the working directory inside the container
 WORKDIR /app
 
-# Sistem bağımlılıkları (sqlite için ekstra gerekmez ama genel hijyen)
-RUN apt-get update && apt-get install -y \
-  build-essential \
-  && rm -rf /var/lib/apt/lists/*
+# Set environment variables
+# Prevents Python from writing pyc files to disk
+ENV PYTHONDONTWRITEBYTECODE=1
+#Prevents Python from buffering stdout and stderr
+ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt .
+# Upgrade pip
+RUN pip install --upgrade pip
+
+# Copy the Django project  and install dependencies
+COPY requirements.txt  /app/
+
+# run this command to install all dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy the Django project to the container
+COPY . /app/
 
-RUN chmod +x entrypoint.sh
+# Expose the Django port
+EXPOSE 8000
 
-CMD ["./entrypoint.sh"]
+# Run Django’s development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
