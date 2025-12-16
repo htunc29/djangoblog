@@ -27,7 +27,6 @@ bitsandbytes==0.45.5
 bleach==6.2.0
 blinker==1.9.0
 cachetools==5.5.2
-Camelot==12.6.29
 certifi==2025.1.31
 cffi==1.17.1
 chardet==5.2.0
@@ -285,7 +284,7 @@ sphinxcontrib-jquery==4.1
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==2.0.0
 sphinxcontrib-serializinghtml==2.0.0
-SQLAlchemy==2.0.43
+SQLAlchemy==1.4.0
 sqlalchemy-migrate==0.11.0
 sqlparse==0.5.3
 sseclient-py==1.8.0
